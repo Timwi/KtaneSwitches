@@ -54,7 +54,8 @@ public class SwitchModule : MonoBehaviour
     protected void SetInitialConfiguration()
     {
         SwitchConfiguration.RuleRandom = new System.Random(1);
-        safeConfigurations = SwitchConfiguration.GetSafeConfigurations(30);
+        safeConfigurations = SwitchConfiguration.GetSafeConfigurations(15);
+        Debug.Log(safeConfigurations.Count);
         goalConfiguration = SwitchConfiguration.GetGoalConfiguration(safeConfigurations);
         SwitchConfiguration initialConfiguration = SwitchConfiguration.GetInitialConfiguration(safeConfigurations, goalConfiguration);
         SetGoalIndicators();

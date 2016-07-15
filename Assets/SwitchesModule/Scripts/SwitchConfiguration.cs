@@ -121,37 +121,28 @@ public class SwitchConfiguration
     {
         List<int> visitedConfigurations = new List<int>();
 
-        visitedConfigurations.Add(startPoint.GetIntValue());
-        List<List<int>> visitQueue = new List<List<int>>();
-        visitQueue.Add(GetAdjacentConfigurations(startPoint.GetIntValue()));
+        Stack<int> visitStack = new Stack<int>();
+        visitStack.Push(startPoint.GetIntValue());
         
         int loops = 0;
 
-        while(visitQueue.Count > 0)
+        while(visitStack.Count > 0)
         {
             if(visitedConfigurations.Count >= numToVisit)
             {
                 break;
             }
 
-            List<int> configurationsToVisit = visitQueue[0];
-            
-
-            while(visitQueue.Count > 0)
+            int configToVisit = visitStack.Pop();
+            if (!visitedConfigurations.Contains(configToVisit))
             {
-                if (configurationsToVisit.Count == 0)
-                    break;
-
-                int configurationToVisit = configurationsToVisit[RuleRandom.Next(0, configurationsToVisit.Count)];
-                configurationsToVisit.Remove(configurationToVisit);
-                if(!visitedConfigurations.Contains(configurationToVisit))
+                visitedConfigurations.Add(configToVisit);
+                foreach(int config in GetAdjacentConfigurations(configToVisit))
                 {
-                    visitedConfigurations.Add(configurationToVisit);
-                    visitQueue.Add(GetAdjacentConfigurations(configurationToVisit));
+                    visitStack.Push(config);
                 }
+                    
             }
-
-            visitQueue.RemoveAt(0);
 
             if (loops++ > 5000)
             {
