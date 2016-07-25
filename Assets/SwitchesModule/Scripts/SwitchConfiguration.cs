@@ -110,7 +110,6 @@ public class SwitchConfiguration
             if (!safeConfigurations.Contains(config))
             {
                 strikeConfigurations.Add(config);
-                Debug.Log(config);
             }
         }
         

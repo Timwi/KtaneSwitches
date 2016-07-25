@@ -30,6 +30,14 @@ public class TestHarness : MonoBehaviour
         }
 
         currentSelectable.ActivateChildSelectableAreas();
+
+
+    }
+
+    [ContextMenu("Take Screenshot")]
+    void TakeScreenshot()
+    {
+        Application.CaptureScreenshot("Assets/Textures/Screenshot.png");
     }
 
     void Update()

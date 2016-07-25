@@ -27,6 +27,7 @@ public class SwitchModule : MonoBehaviour
     protected void OnToggle(int index)
     {
         Switches[index].Up = !Switches[index].Up;
+        GetComponent<KMAudio>().PlayGameSoundAtTransform(KMSoundOverride.SoundEffect.BigButtonPress, transform);
 
         if(GetCurrentConfiguration().Equals(goalConfiguration))
         {
@@ -54,13 +55,13 @@ public class SwitchModule : MonoBehaviour
     protected void SetInitialConfiguration()
     {
         SwitchConfiguration.RuleRandom = new System.Random(1);
-        safeConfigurations = SwitchConfiguration.GetSafeConfigurations(15);
-        Debug.Log(safeConfigurations.Count);
+        safeConfigurations = SwitchConfiguration.GetSafeConfigurations(10);
         goalConfiguration = SwitchConfiguration.GetGoalConfiguration(safeConfigurations);
         SwitchConfiguration initialConfiguration = SwitchConfiguration.GetInitialConfiguration(safeConfigurations, goalConfiguration);
         SetGoalIndicators();
         SetSwitches(initialConfiguration);
         SwitchConfiguration.GetStrikeConfigurations(safeConfigurations);
+        LogHTMLRules();
     }
 
     protected void SetSwitches(SwitchConfiguration config)
@@ -77,5 +78,26 @@ public class SwitchModule : MonoBehaviour
         {
             Switches[i].SetGoal(goalConfiguration.SwitchStates[i]);
         }
+    }
+
+    public void LogHTMLRules()
+    {
+        string html = "<table class='switch-table'>";
+
+        foreach(SwitchConfiguration strikeConfig in SwitchConfiguration.GetStrikeConfigurations(safeConfigurations))
+        {
+            html += "<tr class='switch-row'>";
+            for(int i=0; i < strikeConfig.SwitchStates.Length; i++)
+            {
+                html += "<td class='switch-column'>";
+                html += string.Format("<img src='img/{0}'></img>", strikeConfig.SwitchStates[i] ? "switch-up.svg" : "switch-down.svg");
+                html += "</td>";
+            }
+            html += "</tr>";
+        }
+
+        html += "</table>";
+
+        Debug.Log(html);
     }
 }

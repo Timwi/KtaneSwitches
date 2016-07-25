@@ -17,14 +17,14 @@ AnimationClip:
       serializedVersion: 2
       m_Curve:
       - time: 0
-        value: {x: -60, y: 0, z: 0}
+        value: {x: -50, y: 0, z: 0}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: Base
+    path: SwitchAnchor
   m_PositionCurves: []
   m_ScaleCurves: []
   m_FloatCurves: []
@@ -36,7 +36,7 @@ AnimationClip:
     m_Extent: {x: 0, y: 0, z: 0}
   m_ClipBindingConstant:
     genericBindings:
-    - path: 1619415391
+    - path: 1352049842
       attribute: 4
       script: {fileID: 0}
       classID: 4
@@ -68,7 +68,7 @@ AnimationClip:
       serializedVersion: 2
       m_Curve:
       - time: 0
-        value: -60
+        value: -50
         inSlope: 0
         outSlope: 0
         tangentMode: 10
@@ -76,7 +76,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.x
-    path: Base
+    path: SwitchAnchor
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -91,7 +91,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.y
-    path: Base
+    path: SwitchAnchor
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -106,7 +106,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.z
-    path: Base
+    path: SwitchAnchor
     classID: 4
     script: {fileID: 0}
   m_EulerEditorCurves:
@@ -117,7 +117,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: Base
+    path: SwitchAnchor
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -127,7 +127,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: Base
+    path: SwitchAnchor
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -137,7 +137,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: Base
+    path: SwitchAnchor
     classID: 4
     script: {fileID: 0}
   m_HasGenericRootTransform: 0

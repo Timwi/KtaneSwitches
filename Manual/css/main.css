@@ -893,3 +893,16 @@ td, th {
         page-break-after: avoid;
     }
 }
+
+.switch-column {
+	width:2.1em;
+}
+
+.switch-row {
+	
+}
+
+.switch-table {
+	margin-left:auto;
+	margin-right:auto;
+}
