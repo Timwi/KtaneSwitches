@@ -74,6 +74,18 @@ public class TestHarness : MonoBehaviour
 
     void Update()
     {
+        if (Time.realtimeSinceStartup > 5)
+        {
+            KMBombModule[] modules = FindObjectsOfType<KMBombModule>();
+            for (int i = 0; i < modules.Length; i++)
+            {
+                if (modules[i].OnActivate != null)
+                {
+                    modules[i].OnActivate();
+                }
+            }
+        }
+
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         Debug.DrawRay(ray.origin, ray.direction);
         RaycastHit hit;
@@ -184,5 +196,11 @@ public class TestHarness : MonoBehaviour
                 }
             }
         }
+    }
+
+    [ContextMenu("Take Screenshot")]
+    void TakeScreenshot()
+    {
+        Application.CaptureScreenshot("Assets/Textures/Screenshot.png");
     }
 }

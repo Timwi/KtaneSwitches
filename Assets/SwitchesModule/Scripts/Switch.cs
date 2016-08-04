@@ -5,6 +5,13 @@ public class Switch : MonoBehaviour
 {
     public MeshRenderer TopIndicator;
     public MeshRenderer BottomIndicator;
+
+    void Awake()
+    {
+        TopIndicator.material.color = Color.black;
+        BottomIndicator.material.color = Color.black;
+    }
+
     public bool Up
     {
         get

@@ -13,5 +13,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: SwitchesModule
   title: Switches Module
-  version: 0.1
+  version: .2
   outputFolder: build

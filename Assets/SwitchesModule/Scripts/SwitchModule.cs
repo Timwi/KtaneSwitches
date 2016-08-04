@@ -22,6 +22,7 @@ public class SwitchModule : MonoBehaviour
         }
 
         SetInitialConfiguration();
+        GetComponent<KMBombModule>().OnActivate += OnActivate;
     }
 
     protected void OnToggle(int index)
@@ -54,14 +55,12 @@ public class SwitchModule : MonoBehaviour
 
     protected void SetInitialConfiguration()
     {
-        SwitchConfiguration.RuleRandom = new System.Random(1);
+        SwitchConfiguration.RuleRandom = new System.Random(5);
         safeConfigurations = SwitchConfiguration.GetSafeConfigurations(10);
         goalConfiguration = SwitchConfiguration.GetGoalConfiguration(safeConfigurations);
         SwitchConfiguration initialConfiguration = SwitchConfiguration.GetInitialConfiguration(safeConfigurations, goalConfiguration);
-        SetGoalIndicators();
         SetSwitches(initialConfiguration);
         SwitchConfiguration.GetStrikeConfigurations(safeConfigurations);
-        LogHTMLRules();
     }
 
     protected void SetSwitches(SwitchConfiguration config)
@@ -80,6 +79,7 @@ public class SwitchModule : MonoBehaviour
         }
     }
 
+    [ContextMenu("Log rules")]
     public void LogHTMLRules()
     {
         string html = "<table class='switch-table'>";
@@ -99,5 +99,10 @@ public class SwitchModule : MonoBehaviour
         html += "</table>";
 
         Debug.Log(html);
+    }
+
+    public void OnActivate()
+    {
+        SetGoalIndicators();
     }
 }

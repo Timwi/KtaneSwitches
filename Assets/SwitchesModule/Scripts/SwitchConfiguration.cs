@@ -136,11 +136,13 @@ public class SwitchConfiguration
             if (!visitedConfigurations.Contains(configToVisit))
             {
                 visitedConfigurations.Add(configToVisit);
-                foreach(int config in GetAdjacentConfigurations(configToVisit))
+                List<int> adjacentConfigurations = GetAdjacentConfigurations(configToVisit);
+                while(adjacentConfigurations.Count > 0)
                 {
-                    visitStack.Push(config);
-                }
-                    
+                    int configToAdd = adjacentConfigurations[RuleRandom.Next(0, adjacentConfigurations.Count)];
+                    visitStack.Push(configToAdd);
+                    adjacentConfigurations.Remove(configToAdd);
+                }                    
             }
 
             if (loops++ > 5000)
