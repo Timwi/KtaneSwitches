@@ -23,7 +23,8 @@ public class TestHarness : MonoBehaviour
         currentSelectable = GetComponent<TestSelectable>();
 
         KMBombModule[] modules = FindObjectsOfType<KMBombModule>();
-        currentSelectable.Children = new TestSelectable[modules.Length];
+        KMNeedyModule[] needyModules = FindObjectsOfType<KMNeedyModule>();
+        currentSelectable.Children = new TestSelectable[modules.Length + needyModules.Length];
         for (int i = 0; i < modules.Length; i++)
         {
             currentSelectable.Children[i] = modules[i].GetComponent<TestSelectable>();
@@ -31,6 +32,23 @@ public class TestHarness : MonoBehaviour
 
             modules[i].OnPass = delegate () { Debug.Log("Module Passed"); return false; };
             modules[i].OnStrike = delegate () { Debug.Log("Strike"); return false; };
+        }
+
+        for (int i = 0; i < needyModules.Length; i++)
+        {
+            currentSelectable.Children[modules.Length + i] = needyModules[i].GetComponent<TestSelectable>();
+            needyModules[i].GetComponent<TestSelectable>().Parent = currentSelectable;
+
+            needyModules[i].OnPass = delegate ()
+            {
+                Debug.Log("Module Passed");
+                return false;
+            };
+            needyModules[i].OnStrike = delegate ()
+            {
+                Debug.Log("Strike");
+                return false;
+            };
         }
 
         currentSelectable.ActivateChildSelectableAreas();
@@ -74,18 +92,6 @@ public class TestHarness : MonoBehaviour
 
     void Update()
     {
-        if (Time.realtimeSinceStartup > 5)
-        {
-            KMBombModule[] modules = FindObjectsOfType<KMBombModule>();
-            for (int i = 0; i < modules.Length; i++)
-            {
-                if (modules[i].OnActivate != null)
-                {
-                    modules[i].OnActivate();
-                }
-            }
-        }
-
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         Debug.DrawRay(ray.origin, ray.direction);
         RaycastHit hit;
@@ -196,11 +202,27 @@ public class TestHarness : MonoBehaviour
                 }
             }
         }
-    }
 
-    [ContextMenu("Take Screenshot")]
-    void TakeScreenshot()
-    {
-        Application.CaptureScreenshot("Assets/Textures/Screenshot.png");
+        if (GUILayout.Button("Activate Needy Modules"))
+        {
+            foreach (KMNeedyModule needyModule in GameObject.FindObjectsOfType<KMNeedyModule>())
+            {
+                if (needyModule.OnNeedyActivation != null)
+                {
+                    needyModule.OnNeedyActivation();
+                }
+            }
+        }
+
+        if (GUILayout.Button("Deactivate Needy Modules"))
+        {
+            foreach (KMNeedyModule needyModule in GameObject.FindObjectsOfType<KMNeedyModule>())
+            {
+                if (needyModule.OnNeedyDeactivation != null)
+                {
+                    needyModule.OnNeedyDeactivation();
+                }
+            }
+        }
     }
 }
