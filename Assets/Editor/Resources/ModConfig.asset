@@ -16,7 +16,7 @@ MonoBehaviour:
   description: "A module where you need to toggle the switches into the right positions
     while avoiding bad combinations set out in the manual. \r\n\r\nYou can find the
     manual page for this module here: \r\n\r\nhttps://bfdev.github.io/Switches/Manual/"
-  version: .4
+  version: .6
   outputFolder: C:\Program Files (x86)\Steam\steamapps\common\Keep Talking and Nobody
     Explodes\mods
   previewImage: {fileID: 2800000, guid: a2f07bc5c325740439bb982e43acf59c, type: 3}
